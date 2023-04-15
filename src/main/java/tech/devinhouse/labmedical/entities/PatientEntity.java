@@ -2,11 +2,12 @@ package tech.devinhouse.labmedical.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -14,11 +15,14 @@ import java.time.LocalDate;
 public class PatientEntity extends Person {
     private String allergyList;
     private String specialNeeds;
-    @NotBlank
     private String emergencyContact;
     private String insurance;
     private String insuranceCardId;
-    private LocalDate insuranceExpirationDate;
+    private Date insuranceExpirationDate;
     @ManyToOne
     private AddressEntity address;
+    @OneToMany
+    private List<AppointmentEntity> appointments;
+    @OneToMany
+    private List<ExamEntity> exams;
 }

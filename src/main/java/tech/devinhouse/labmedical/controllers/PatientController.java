@@ -47,6 +47,11 @@ public class PatientController {
         return ResponseEntity.ok(service.findAll());
     }
 
+    @GetMapping(params = "nome")
+    public ResponseEntity<List<PatientResponse>> findByName(@RequestParam String nome) {
+        return ResponseEntity.ok(service.findByFullName(nome));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PatientResponse> findById(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findById(id));

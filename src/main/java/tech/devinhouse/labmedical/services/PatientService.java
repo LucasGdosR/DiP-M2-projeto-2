@@ -68,13 +68,15 @@ public class PatientService {
     }
 
     public List<PatientResponse> findAll() {
-        // ToDo
-        return null;
+        return mapper.map(repository.findAll());
+    }
+
+    public List<PatientResponse> findByFullName(String name) {
+        return mapper.map(repository.findByFullNameContainingIgnoreCase(name));
     }
 
     public PatientResponse findById(Integer id) {
-        // ToDo
-        return null;
+        return mapper.map(repository.findById(id).orElseThrow(NoSuchPatientException::new));
     }
 
     public void deleteById(Integer id) {

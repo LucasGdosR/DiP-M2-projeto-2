@@ -6,10 +6,7 @@ import tech.devinhouse.labmedical.dtos.PatientPostRequest;
 import tech.devinhouse.labmedical.dtos.PatientPutRequest;
 import tech.devinhouse.labmedical.dtos.PatientResponse;
 import tech.devinhouse.labmedical.entities.PatientEntity;
-import tech.devinhouse.labmedical.exceptions.DuplicateCpfException;
-import tech.devinhouse.labmedical.exceptions.IllegalBirthdayException;
-import tech.devinhouse.labmedical.exceptions.NoSuchAddressException;
-import tech.devinhouse.labmedical.exceptions.NoSuchPatientException;
+import tech.devinhouse.labmedical.exceptions.*;
 import tech.devinhouse.labmedical.mappers.PatientMapper;
 import tech.devinhouse.labmedical.repositories.PatientRepository;
 
@@ -80,6 +77,11 @@ public class PatientService {
     }
 
     public void deleteById(Integer id) {
-        // ToDo
+        PatientEntity patient = repository.findById(id).orElseThrow(NoSuchPatientException::new);
+
+        if (patient.getExams().size() > 0 || patient.getAppointments().size() > 0)
+            throw new PatientHasAppointmentsOrExamsException();
+
+        repository.deleteById(id);
     }
 }

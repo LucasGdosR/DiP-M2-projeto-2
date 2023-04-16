@@ -9,11 +9,10 @@ import tech.devinhouse.labmedical.enums.MaritalStatus;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

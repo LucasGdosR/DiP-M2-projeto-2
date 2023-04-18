@@ -2,7 +2,6 @@ package tech.devinhouse.labmedical.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,6 @@ import tech.devinhouse.labmedical.enums.Specialization;
 @Setter
 @SuperBuilder
 public class DoctorEntity extends Person {
-    @NotBlank
     private String crm;
     @Enumerated
     private Specialization specialization;

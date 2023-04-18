@@ -9,6 +9,8 @@ import tech.devinhouse.labmedical.exceptions.NoSuchPatientException;
 import tech.devinhouse.labmedical.mappers.AppointmentMapper;
 import tech.devinhouse.labmedical.repositories.AppointmentRepository;
 
+import java.util.List;
+
 @Service
 public class AppointmentService {
     private final PatientService patientService;
@@ -47,5 +49,9 @@ public class AppointmentService {
     public void deleteById(Integer id) {
         repository.findById(id).orElseThrow(NoSuchAppointmentException::new);
         repository.deleteById(id);
+    }
+
+    public List<AppointmentEntity> findAll() {
+        return repository.findAll();
     }
 }

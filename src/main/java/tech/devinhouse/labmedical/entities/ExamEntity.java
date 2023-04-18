@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-import java.io.File;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,7 +23,7 @@ public class ExamEntity {
     private String type;
     @NotBlank
     private String laboratory;
-    private File file; // ToDo: confirmar que é isso mesmo
+    private String file;
     @NotBlank
     private String results;
     @ManyToOne

@@ -15,18 +15,21 @@ public class AppointmentEntity {
     private String prescribedMedication;
     private String dosageAndPrecautions;
     @ManyToOne
+    private DoctorEntity doctor;
+    @ManyToOne
     private PatientEntity patient;
 
     public AppointmentEntity() {
     }
 
-    public AppointmentEntity(Integer id, String motive, LocalDateTime dateTime, String issueDescription, String prescribedMedication, String dosageAndPrecautions, PatientEntity patient) {
+    public AppointmentEntity(Integer id, String motive, LocalDateTime dateTime, String issueDescription, String prescribedMedication, String dosageAndPrecautions, DoctorEntity doctor, PatientEntity patient) {
         this.id = id;
         this.motive = motive;
         this.dateTime = dateTime;
         this.issueDescription = issueDescription;
         this.prescribedMedication = prescribedMedication;
         this.dosageAndPrecautions = dosageAndPrecautions;
+        this.doctor = doctor;
         this.patient = patient;
     }
 
@@ -76,6 +79,14 @@ public class AppointmentEntity {
 
     public void setDosageAndPrecautions(String dosageAndPrecautions) {
         this.dosageAndPrecautions = dosageAndPrecautions;
+    }
+
+    public DoctorEntity getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(DoctorEntity doctor) {
+        this.doctor = doctor;
     }
 
     public PatientEntity getPatient() {

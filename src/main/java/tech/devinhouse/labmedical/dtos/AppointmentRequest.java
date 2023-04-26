@@ -20,5 +20,7 @@ public class AppointmentRequest {
     @NotBlank
     private String dosageAndPrecautions;
     @NotBlank
+    private Integer doctorId;
+    @NotBlank
     private Integer patientId;
 }

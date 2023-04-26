@@ -8,5 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppointmentResponse {
-    Integer id;
+    private String motive;
+    private String dateTime;
+    private String issueDescription;
+    private String prescribedMedication;
+    private String dosageAndPrecautions;
+    private Integer doctorId;
+    private Integer patientId;
 }

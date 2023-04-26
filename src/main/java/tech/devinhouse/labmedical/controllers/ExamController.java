@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import tech.devinhouse.labmedical.dtos.ExamRequest;
 import tech.devinhouse.labmedical.dtos.ExamResponse;
+import tech.devinhouse.labmedical.entities.ExamEntity;
 import tech.devinhouse.labmedical.services.ExamService;
 
 import java.net.URI;
@@ -21,11 +22,11 @@ public class ExamController {
     }
 
     @PostMapping
-    public ResponseEntity<ExamResponse> register(
+    public ResponseEntity<ExamEntity> register(
             @RequestBody @Valid ExamRequest request,
             UriComponentsBuilder uriBuilder) {
 
-        ExamResponse response = service.register(request);
+        ExamEntity response = service.register(request);
 
         URI uri = uriBuilder
                 .path("/api/exames/{id}")

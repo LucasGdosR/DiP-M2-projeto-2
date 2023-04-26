@@ -23,12 +23,12 @@ public class ExamService {
         this.repository = repository;
     }
 
-    public ExamResponse register(ExamRequest request) throws NoSuchPatientException {
+    public ExamEntity register(ExamRequest request) throws NoSuchPatientException {
         patientService.findById(request.getPatientId());
 
         ExamEntity exam = mapper.map(request);
 
-        return mapper.map(repository.save(exam));
+        return repository.save(exam);
     }
 
     public ExamResponse update(Integer id, ExamRequest request) throws NoSuchPatientException {

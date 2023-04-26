@@ -1,12 +1,18 @@
 package tech.devinhouse.labmedical.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class ExamResponse {
-    Integer id;
+    private String name;
+    private String dateTime;
+    private String type;
+    private String laboratory;
+    private String file;
+    private String results;
+    private Integer patientId;
+    private Integer doctorId;
 }

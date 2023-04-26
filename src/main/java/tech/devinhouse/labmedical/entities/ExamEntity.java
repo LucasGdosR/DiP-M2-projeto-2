@@ -1,8 +1,6 @@
 package tech.devinhouse.labmedical.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,24 +8,21 @@ public class ExamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotBlank
     private String name;
-    @NotBlank
     private LocalDateTime dateTime;
-    @NotBlank
     private String type;
-    @NotBlank
     private String laboratory;
     private String file;
-    @NotBlank
     private String results;
     @ManyToOne
     private PatientEntity patient;
+    @ManyToOne
+    private DoctorEntity doctor;
 
     public ExamEntity() {
     }
 
-    public ExamEntity(Integer id, String name, LocalDateTime dateTime, String type, String laboratory, String file, String results, PatientEntity patient) {
+    public ExamEntity(Integer id, String name, LocalDateTime dateTime, String type, String laboratory, String file, String results, PatientEntity patient, DoctorEntity doctor) {
         this.id = id;
         this.name = name;
         this.dateTime = dateTime;
@@ -36,6 +31,7 @@ public class ExamEntity {
         this.file = file;
         this.results = results;
         this.patient = patient;
+        this.doctor = doctor;
     }
 
     public Integer getId() {
@@ -100,5 +96,13 @@ public class ExamEntity {
 
     public void setPatient(PatientEntity patient) {
         this.patient = patient;
+    }
+
+    public DoctorEntity getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(DoctorEntity doctor) {
+        this.doctor = doctor;
     }
 }

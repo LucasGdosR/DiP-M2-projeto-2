@@ -21,4 +21,5 @@ public class ExamRequest {
     @NotBlank
     private String results;
     private Integer patientId;
+    private Integer doctorId;
 }

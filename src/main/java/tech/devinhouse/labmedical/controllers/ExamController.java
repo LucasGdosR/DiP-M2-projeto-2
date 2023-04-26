@@ -9,7 +9,6 @@ import tech.devinhouse.labmedical.dtos.ExamResponse;
 import tech.devinhouse.labmedical.services.ExamService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/exames")
@@ -39,11 +38,6 @@ public class ExamController {
     @PutMapping("/{id}")
     public ResponseEntity<ExamResponse> update(@PathVariable Integer id, @RequestBody @Valid ExamRequest request) {
         return ResponseEntity.ok(service.update(id, request));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<ExamResponse>> findAll() {
-        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")

@@ -4,7 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import tech.devinhouse.labmedical.dtos.PatientRequest;
+import tech.devinhouse.labmedical.dtos.PatientPostRequest;
+import tech.devinhouse.labmedical.dtos.PatientPutRequest;
 import tech.devinhouse.labmedical.dtos.PatientResponse;
 import tech.devinhouse.labmedical.services.PatientService;
 
@@ -23,7 +24,7 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity<PatientResponse> register(
-            @RequestBody @Valid PatientRequest request,
+            @RequestBody @Valid PatientPostRequest request,
             UriComponentsBuilder uriBuilder) {
 
         PatientResponse response = service.register(request);
@@ -37,13 +38,18 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientResponse> update(@PathVariable Integer id, @RequestBody @Valid PatientRequest request) {
+    public ResponseEntity<PatientResponse> update(@PathVariable Integer id, @RequestBody @Valid PatientPutRequest request) {
         return ResponseEntity.ok(service.update(id, request));
     }
 
     @GetMapping
     public ResponseEntity<List<PatientResponse>> findAll() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping(params = "nome")
+    public ResponseEntity<List<PatientResponse>> findByName(@RequestParam String nome) {
+        return ResponseEntity.ok(service.findByFullName(nome));
     }
 
     @GetMapping("/{id}")

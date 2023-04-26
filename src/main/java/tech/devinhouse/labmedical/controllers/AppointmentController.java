@@ -9,7 +9,6 @@ import tech.devinhouse.labmedical.dtos.AppointmentResponse;
 import tech.devinhouse.labmedical.services.AppointmentService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/consultas")
@@ -39,11 +38,6 @@ public class AppointmentController {
     @PutMapping("/{id}")
     public ResponseEntity<AppointmentResponse> update(@PathVariable Integer id, @RequestBody @Valid AppointmentRequest request) {
         return ResponseEntity.ok(service.update(id, request));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<AppointmentResponse>> findAll() {
-        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")

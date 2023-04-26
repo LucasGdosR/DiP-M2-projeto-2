@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.devinhouse.labmedical.dtos.AddressRequest;
-import tech.devinhouse.labmedical.dtos.AddressResponse;
+import tech.devinhouse.labmedical.entities.AddressEntity;
 import tech.devinhouse.labmedical.services.AddressService;
 
 import java.net.URI;
@@ -21,13 +21,12 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<AddressResponse> register(@RequestBody @Valid AddressRequest request) {
-        // Acrescentar o ID à resposta
+    public ResponseEntity<AddressEntity> register(@RequestBody @Valid AddressRequest request) {
         return ResponseEntity.created(URI.create("/api/enderecos")).body(service.register(request));
     }
 
     @GetMapping
-    public ResponseEntity<List<AddressResponse>> findAll() {
+    public ResponseEntity<List<AddressEntity>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 }

@@ -1,13 +1,11 @@
 package tech.devinhouse.labmedical.entities;
 
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import tech.devinhouse.labmedical.enums.MaritalStatus;
 
 import java.util.Date;
 
+@MappedSuperclass
 public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

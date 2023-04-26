@@ -1,15 +1,13 @@
 package tech.devinhouse.labmedical.services;
 
 import lombok.SneakyThrows;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import tech.devinhouse.labmedical.dtos.DoctorPostRequest;
 import tech.devinhouse.labmedical.dtos.DoctorPutRequest;
 import tech.devinhouse.labmedical.dtos.DoctorResponse;
 import tech.devinhouse.labmedical.entities.DoctorEntity;
-import tech.devinhouse.labmedical.exceptions.DuplicateCpfException;
-import tech.devinhouse.labmedical.exceptions.IllegalBirthdayException;
-import tech.devinhouse.labmedical.exceptions.ImmutableDocumentException;
-import tech.devinhouse.labmedical.exceptions.NoSuchDoctorException;
 import tech.devinhouse.labmedical.mappers.DoctorMapper;
 import tech.devinhouse.labmedical.repositories.DoctorRepository;
 
@@ -39,20 +37,24 @@ public class DoctorService {
     private void validateBirthday(String birthday) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyy");
         Date birthdate = formatter.parse(birthday);
-        if (birthdate.after(new Date())) throw new IllegalBirthdayException();
+        if (birthdate.after(new Date())) throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Data de nascimento no futuro");
     }
 
     private void validateUniqueCPF(String cpf) {
-        repository.findByCpf(cpf).ifPresent(e -> {throw new DuplicateCpfException();});
+        repository.findByCpf(cpf).ifPresent(e -> {throw new ResponseStatusException(
+                HttpStatus.CONFLICT, "CPF duplicado");});
     }
 
     public DoctorResponse update(Integer id, DoctorPutRequest request) {
         validateBirthday(request.getBirthday());
 
-        DoctorEntity oldDoctor = repository.findById(id).orElseThrow(NoSuchDoctorException::new);
+        DoctorEntity oldDoctor = repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Id de médico inválido"));
 
         if (!request.getCpf().equals(oldDoctor.getCpf()) || !request.getRg().equals(oldDoctor.getRg()))
-            throw new ImmutableDocumentException();
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "CPF e RG não podem ser alterados");
 
         DoctorEntity updatedDoctor = mapper.map(request);
         updatedDoctor.setId(oldDoctor.getId());
@@ -61,10 +63,16 @@ public class DoctorService {
     }
 
     public DoctorResponse changePassword(Integer id, String password) {
-        DoctorEntity doctor = repository.findById(id).orElseThrow(NoSuchDoctorException::new);
+        DoctorEntity doctor = repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Id de médico inválido"));
 
         doctor.setPassword(password);
 
         return mapper.map(repository.save(doctor));
+    }
+
+    public void findById(Integer id) {
+        repository.findById(id).orElseThrow((() -> new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Id de médico inexistente")));
     }
 }

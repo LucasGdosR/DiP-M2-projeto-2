@@ -1,6 +1,8 @@
 package tech.devinhouse.labmedical.controllers;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -43,7 +45,9 @@ public class DoctorController {
     }
 
     @PutMapping("/{id}/senha")
-    public ResponseEntity<DoctorResponse> changePassword(@PathVariable Integer id, @RequestBody String password) {
+    public ResponseEntity<DoctorResponse> changePassword(@PathVariable Integer id,
+                                                         @RequestBody @Size(min = 8) @Pattern(regexp = "^[A-Za-z0-9]*$") @Valid
+                                                         String password) {
         return ResponseEntity.ok(service.changePassword(id, password));
     }
 }

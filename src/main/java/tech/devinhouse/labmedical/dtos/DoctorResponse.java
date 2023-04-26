@@ -1,12 +1,22 @@
 package tech.devinhouse.labmedical.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class DoctorResponse {
-    Integer id;
+    private String fullName;
+    private String gender;
+    private String birthday;
+    private String cpf;
+    private String rg;
+    private String maritalStatus;
+    private String telephone;
+    private String email;
+    private String placeOfBirth;
+    private String crm;
+    private String specialization;
+    private String password;
 }

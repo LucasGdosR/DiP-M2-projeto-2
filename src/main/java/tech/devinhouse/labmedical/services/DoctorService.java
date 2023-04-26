@@ -2,7 +2,8 @@ package tech.devinhouse.labmedical.services;
 
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
-import tech.devinhouse.labmedical.dtos.DoctorRequest;
+import tech.devinhouse.labmedical.dtos.DoctorPostRequest;
+import tech.devinhouse.labmedical.dtos.DoctorPutRequest;
 import tech.devinhouse.labmedical.dtos.DoctorResponse;
 import tech.devinhouse.labmedical.entities.DoctorEntity;
 import tech.devinhouse.labmedical.exceptions.DuplicateCpfException;
@@ -25,13 +26,13 @@ public class DoctorService {
         this.repository = repository;
     }
 
-    public DoctorResponse register(DoctorRequest request) {
+    public DoctorEntity register(DoctorPostRequest request) {
         validateBirthday(request.getBirthday());
         validateUniqueCPF(request.getCpf());
 
         DoctorEntity newDoctor = mapper.map(request);
 
-        return mapper.map(repository.save(newDoctor));
+        return repository.save(newDoctor);
     }
 
     @SneakyThrows
@@ -45,7 +46,7 @@ public class DoctorService {
         repository.findByCpf(cpf).ifPresent(e -> {throw new DuplicateCpfException();});
     }
 
-    public DoctorResponse update(Integer id, DoctorRequest request) {
+    public DoctorResponse update(Integer id, DoctorPutRequest request) {
         validateBirthday(request.getBirthday());
 
         DoctorEntity oldDoctor = repository.findById(id).orElseThrow(NoSuchDoctorException::new);

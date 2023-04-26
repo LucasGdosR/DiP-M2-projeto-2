@@ -26,14 +26,14 @@ public class PatientService {
         this.repository = repository;
     }
 
-    public PatientResponse register(PatientPostRequest request) {
+    public PatientEntity register(PatientPostRequest request) {
         validateBirthday(request.getBirthday());
         validateAddress(request.getAddressId());
         validateUniqueCPF(request.getCpf());
 
         PatientEntity newPatient = mapper.map(request);
 
-        return mapper.map(repository.save(newPatient));
+        return repository.save(newPatient);
     }
 
     @SneakyThrows

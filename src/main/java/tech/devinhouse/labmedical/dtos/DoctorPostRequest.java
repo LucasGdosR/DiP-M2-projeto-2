@@ -14,7 +14,7 @@ import tech.devinhouse.labmedical.enums.MaritalStatus;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DoctorRequest {
+public class DoctorPostRequest {
     @NotBlank
     private String fullName;
     @NotBlank

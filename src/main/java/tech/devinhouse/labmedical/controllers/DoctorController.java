@@ -4,8 +4,10 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import tech.devinhouse.labmedical.dtos.DoctorRequest;
+import tech.devinhouse.labmedical.dtos.DoctorPostRequest;
+import tech.devinhouse.labmedical.dtos.DoctorPutRequest;
 import tech.devinhouse.labmedical.dtos.DoctorResponse;
+import tech.devinhouse.labmedical.entities.DoctorEntity;
 import tech.devinhouse.labmedical.services.DoctorService;
 
 import java.net.URI;
@@ -21,11 +23,11 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<DoctorResponse> register(
-            @RequestBody @Valid DoctorRequest request,
+    public ResponseEntity<DoctorEntity> register(
+            @RequestBody @Valid DoctorPostRequest request,
             UriComponentsBuilder uriBuilder) {
 
-        DoctorResponse response = service.register(request);
+        DoctorEntity response = service.register(request);
 
         URI uri = uriBuilder
                 .path("/api/usuarios/{id}")
@@ -36,7 +38,7 @@ public class DoctorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DoctorResponse> update(@PathVariable Integer id, @RequestBody @Valid DoctorRequest request) {
+    public ResponseEntity<DoctorResponse> update(@PathVariable Integer id, @RequestBody @Valid DoctorPutRequest request) {
         return ResponseEntity.ok(service.update(id, request));
     }
 

@@ -1,13 +1,13 @@
 package tech.devinhouse.labmedical.dtos;
 
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tech.devinhouse.labmedical.enums.MaritalStatus;
 
 import java.util.Date;
 
@@ -22,8 +22,8 @@ public class PatientPutRequest {
     private String gender;
     @NotBlank
     private String birthday;
-    @Enumerated @NotBlank
-    private MaritalStatus maritalStatus;
+    @Min(0) @Max(4)
+    private Integer maritalStatus;
     @NotBlank
     private String telephone;
     @Email
@@ -39,5 +39,5 @@ public class PatientPutRequest {
     private String insuranceCardId;
     private Date insuranceExpirationDate;
     @NotBlank
-    private Integer addressId;
+    private java.lang.Integer addressId;
 }

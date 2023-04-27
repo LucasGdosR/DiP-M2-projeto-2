@@ -1,7 +1,6 @@
 package tech.devinhouse.labmedical.entities;
 
 import jakarta.persistence.*;
-import tech.devinhouse.labmedical.enums.MaritalStatus;
 
 import java.util.Date;
 
@@ -9,14 +8,13 @@ import java.util.Date;
 public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+    protected java.lang.Integer id;
     protected String fullName;
     protected String gender;
     protected Date birthday;
     protected String cpf;
     protected String rg;
-    @Enumerated
-    protected MaritalStatus maritalStatus;
+    protected Integer maritalStatus;
     protected String telephone;
     protected String email;
     protected String placeOfBirth;
@@ -24,7 +22,7 @@ public abstract class Person {
     public Person() {
     }
 
-    public Person(Integer id, String fullName, String gender, Date birthday, String cpf, String rg, MaritalStatus maritalStatus, String telephone, String email, String placeOfBirth) {
+    public Person(java.lang.Integer id, String fullName, String gender, Date birthday, String cpf, String rg, Integer maritalStatus, String telephone, String email, String placeOfBirth) {
         this.id = id;
         this.fullName = fullName;
         this.gender = gender;
@@ -37,11 +35,11 @@ public abstract class Person {
         this.placeOfBirth = placeOfBirth;
     }
 
-    public Integer getId() {
+    public java.lang.Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(java.lang.Integer id) {
         this.id = id;
     }
 
@@ -85,11 +83,11 @@ public abstract class Person {
         this.rg = rg;
     }
 
-    public MaritalStatus getMaritalStatus() {
+    public Integer getMaritalStatus() {
         return maritalStatus;
     }
 
-    public void setMaritalStatus(MaritalStatus maritalStatus) {
+    public void setMaritalStatus(Integer maritalStatus) {
         this.maritalStatus = maritalStatus;
     }
 

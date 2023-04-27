@@ -1,13 +1,8 @@
 package tech.devinhouse.labmedical.dtos;
 
-import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
-import tech.devinhouse.labmedical.enums.MaritalStatus;
 
 @Getter
 @Setter
@@ -26,9 +21,8 @@ public class DoctorPostRequest {
     private String cpf;
     @NotBlank
     private String rg;
-    @Enumerated
-    @NotBlank
-    private MaritalStatus maritalStatus;
+    @Min(0) @Max(4)
+    private Integer maritalStatus;
     @NotBlank
     private String telephone;
     @Email
@@ -38,7 +32,7 @@ public class DoctorPostRequest {
     private String placeOfBirth;
     @NotBlank
     private String crm;
-    @Enumerated
+    @Min(0) @Max(7)
     private String specialization;
     @Size(min = 8)
     @Pattern(regexp = "^[A-Za-z0-9]*$")

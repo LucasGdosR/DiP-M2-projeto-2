@@ -1,11 +1,11 @@
 package tech.devinhouse.labmedical.dtos;
 
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
-import tech.devinhouse.labmedical.enums.MaritalStatus;
 
 @Getter
 @Setter
@@ -24,9 +24,8 @@ public class DoctorPutRequest {
     private String cpf;
     @NotBlank
     private String rg;
-    @Enumerated
-    @NotBlank
-    private MaritalStatus maritalStatus;
+    @Min(0) @Max(4)
+    private Integer maritalStatus;
     @NotBlank
     private String telephone;
     @Email
@@ -36,6 +35,6 @@ public class DoctorPutRequest {
     private String placeOfBirth;
     @NotBlank
     private String crm;
-    @Enumerated
+    @Min(0) @Max(7)
     private String specialization;
 }

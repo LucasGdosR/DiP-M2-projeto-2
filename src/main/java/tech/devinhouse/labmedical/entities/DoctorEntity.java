@@ -1,12 +1,9 @@
 package tech.devinhouse.labmedical.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.experimental.SuperBuilder;
-import tech.devinhouse.labmedical.enums.MaritalStatus;
-import tech.devinhouse.labmedical.enums.Specialization;
 
 import java.util.Date;
 
@@ -14,8 +11,7 @@ import java.util.Date;
 @SuperBuilder
 public class DoctorEntity extends Person {
     private String crm;
-    @Enumerated
-    private Specialization specialization;
+    private Integer specialization;
     @Size(min = 8)
     @Pattern(regexp = "^[A-Za-z0-9]*$")
     private String password;
@@ -23,7 +19,7 @@ public class DoctorEntity extends Person {
     public DoctorEntity() {
     }
 
-    public DoctorEntity(Integer id, String fullName, String gender, Date birthday, String cpf, String rg, MaritalStatus maritalStatus, String telephone, String email, String placeOfBirth, String crm, Specialization specialization, String password) {
+    public DoctorEntity(java.lang.Integer id, String fullName, String gender, Date birthday, String cpf, String rg, Integer maritalStatus, String telephone, String email, String placeOfBirth, String crm, Integer specialization, String password) {
         super(id, fullName, gender, birthday, cpf, rg, maritalStatus, telephone, email, placeOfBirth);
         this.crm = crm;
         this.specialization = specialization;
@@ -38,11 +34,11 @@ public class DoctorEntity extends Person {
         this.crm = crm;
     }
 
-    public Specialization getSpecialization() {
+    public Integer getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(Specialization specialization) {
+    public void setSpecialization(Integer specialization) {
         this.specialization = specialization;
     }
 

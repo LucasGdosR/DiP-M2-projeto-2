@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.experimental.SuperBuilder;
-import tech.devinhouse.labmedical.enums.MaritalStatus;
 
 import java.util.Date;
 import java.util.List;
@@ -28,7 +27,7 @@ public class PatientEntity extends Person {
     public PatientEntity() {
     }
 
-    public PatientEntity(Integer id, String fullName, String gender, Date birthday, String cpf, String rg, MaritalStatus maritalStatus, String telephone, String email, String placeOfBirth, String allergyList, String specialNeeds, String emergencyContact, String insurance, String insuranceCardId, Date insuranceExpirationDate, AddressEntity address, List<AppointmentEntity> appointments, List<ExamEntity> exams) {
+    public PatientEntity(java.lang.Integer id, String fullName, String gender, Date birthday, String cpf, String rg, Integer maritalStatus, String telephone, String email, String placeOfBirth, String allergyList, String specialNeeds, String emergencyContact, String insurance, String insuranceCardId, Date insuranceExpirationDate, AddressEntity address, List<AppointmentEntity> appointments, List<ExamEntity> exams) {
         super(id, fullName, gender, birthday, cpf, rg, maritalStatus, telephone, email, placeOfBirth);
         this.allergyList = allergyList;
         this.specialNeeds = specialNeeds;

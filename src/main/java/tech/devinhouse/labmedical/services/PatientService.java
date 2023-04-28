@@ -1,6 +1,5 @@
 package tech.devinhouse.labmedical.services;
 
-import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -11,6 +10,7 @@ import tech.devinhouse.labmedical.entities.PatientEntity;
 import tech.devinhouse.labmedical.mappers.PatientMapper;
 import tech.devinhouse.labmedical.repositories.PatientRepository;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,12 +37,15 @@ public class PatientService {
         return repository.save(newPatient);
     }
 
-    @SneakyThrows
     private void validateBirthday(String birthday) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyy");
-        Date birthdate = formatter.parse(birthday);
-        if (birthdate.after(new Date())) throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Data de nascimento no futuro");
+        try {
+            Date birthdate = formatter.parse(birthday);
+            if (birthdate.after(new Date())) throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Data de nascimento no futuro");
+        } catch (ParseException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Formato de data inválida");
+        }
     }
 
     private void validateAddress(Integer id) throws ResponseStatusException {

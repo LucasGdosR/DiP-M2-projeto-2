@@ -9,14 +9,17 @@ public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected java.lang.Integer id;
+    @Column(name = "full_name")
     protected String fullName;
     protected String gender;
     protected Date birthday;
     protected String cpf;
     protected String rg;
+    @Column(name = "marital_status")
     protected Integer maritalStatus;
     protected String telephone;
     protected String email;
+    @Column(name = "place_of_birth")
     protected String placeOfBirth;
 
     public Person() {

@@ -9,6 +9,7 @@ public class ExamEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @Column(name = "date_time")
     private LocalDateTime dateTime;
     private String type;
     private String laboratory;

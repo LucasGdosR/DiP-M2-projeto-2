@@ -1,5 +1,6 @@
 package tech.devinhouse.labmedical.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -11,11 +12,16 @@ import java.util.List;
 @Entity
 @SuperBuilder
 public class PatientEntity extends Person {
+    @Column(name = "allergy_list")
     private String allergyList;
+    @Column(name = "special_needs")
     private String specialNeeds;
+    @Column(name = "emergency_contact")
     private String emergencyContact;
     private String insurance;
+    @Column(name = "insurance_card_id")
     private String insuranceCardId;
+    @Column(name = "insurance_expiration_date")
     private Date insuranceExpirationDate;
     @ManyToOne
     private AddressEntity address;

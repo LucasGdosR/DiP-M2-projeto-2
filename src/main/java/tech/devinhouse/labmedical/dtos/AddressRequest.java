@@ -12,7 +12,7 @@ public class AddressRequest {
     @NotBlank
     private String street;
     @NotBlank
-    private String number;
+    private String num;
     private String complement;
     @NotBlank
     private String neighborhood;
@@ -50,12 +50,12 @@ public class AddressRequest {
         this.street = street;
     }
 
-    public String getNumber() {
-        return number;
+    public String getNum() {
+        return num;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setNum(String num) {
+        this.num = num;
     }
 
     public String getComplement() {

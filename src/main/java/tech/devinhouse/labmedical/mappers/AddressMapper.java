@@ -24,7 +24,7 @@ public class AddressMapper {
         addressEntity.setCity( source.getCity() );
         addressEntity.setState( source.getState() );
         addressEntity.setStreet( source.getStreet() );
-        addressEntity.setNumber( source.getNumber() );
+        addressEntity.setNum( source.getNum() );
         addressEntity.setComplement( source.getComplement() );
         addressEntity.setNeighborhood( source.getNeighborhood() );
         addressEntity.setReference( source.getReference() );

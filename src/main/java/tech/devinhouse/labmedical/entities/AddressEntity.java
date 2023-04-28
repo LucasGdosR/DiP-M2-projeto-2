@@ -14,7 +14,7 @@ public class AddressEntity {
     private String city;
     private String state;
     private String street;
-    private String number;
+    private String num;
     private String complement;
     private String neighborhood;
     private String reference;
@@ -22,13 +22,13 @@ public class AddressEntity {
     public AddressEntity() {
     }
 
-    public AddressEntity(Integer id, String cep, String city, String state, String street, String number, String complement, String neighborhood, String reference) {
+    public AddressEntity(Integer id, String cep, String city, String state, String street, String num, String complement, String neighborhood, String reference) {
         this.id = id;
         this.cep = cep;
         this.city = city;
         this.state = state;
         this.street = street;
-        this.number = number;
+        this.num = num;
         this.complement = complement;
         this.neighborhood = neighborhood;
         this.reference = reference;
@@ -74,12 +74,12 @@ public class AddressEntity {
         this.street = street;
     }
 
-    public String getNumber() {
-        return number;
+    public String getNum() {
+        return num;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setNum(String num) {
+        this.num = num;
     }
 
     public String getComplement() {

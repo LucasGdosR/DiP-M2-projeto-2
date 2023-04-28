@@ -6,12 +6,12 @@ public class DoctorResponse {
     private String birthday;
     private String cpf;
     private String rg;
-    private String maritalStatus;
+    private Integer maritalStatus;
     private String telephone;
     private String email;
     private String placeOfBirth;
     private String crm;
-    private String specialization;
+    private Integer specialization;
     private String password;
 
     public String getFullName() {
@@ -54,11 +54,11 @@ public class DoctorResponse {
         this.rg = rg;
     }
 
-    public String getMaritalStatus() {
+    public Integer getMaritalStatus() {
         return maritalStatus;
     }
 
-    public void setMaritalStatus(String maritalStatus) {
+    public void setMaritalStatus(Integer maritalStatus) {
         this.maritalStatus = maritalStatus;
     }
 
@@ -94,11 +94,11 @@ public class DoctorResponse {
         this.crm = crm;
     }
 
-    public String getSpecialization() {
+    public Integer getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Integer specialization) {
         this.specialization = specialization;
     }
 

@@ -28,8 +28,8 @@ public class AddressService {
         return repository.findAll();
     }
 
-    public void findById(Integer id) {
-        repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+    public AddressEntity findById(Integer id) {
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.BAD_REQUEST, "Id de endereço não existente"));
     }
 }

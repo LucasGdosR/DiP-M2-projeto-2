@@ -33,12 +33,13 @@ public class PatientService {
         validateUniqueCPF(request.getCpf());
 
         PatientEntity newPatient = mapper.map(request);
+        newPatient.setAddress(addressService.findById(request.getAddressId()));
 
         return repository.save(newPatient);
     }
 
     private void validateBirthday(String birthday) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         try {
             Date birthdate = formatter.parse(birthday);
             if (birthdate.after(new Date())) throw new ResponseStatusException(
@@ -69,6 +70,10 @@ public class PatientService {
         updatedPatient.setId(oldPatient.getId());
         updatedPatient.setCpf(oldPatient.getCpf());
         updatedPatient.setRg(oldPatient.getRg());
+        updatedPatient.setAppointments(oldPatient.getAppointments());
+        updatedPatient.setExams(oldPatient.getExams());
+
+        updatedPatient.setAddress(addressService.findById(request.getAddressId()));
 
         return mapper.map(repository.save(updatedPatient));
     }
@@ -94,5 +99,10 @@ public class PatientService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Paciente possui consulta ou exame");
 
         repository.deleteById(id);
+    }
+
+    public PatientEntity findEntityById(Integer id) {
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Id de paciente inválido"));
     }
 }

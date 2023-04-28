@@ -34,7 +34,7 @@ public class DoctorService {
     }
 
     private void validateBirthday(String birthday) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         try {
             Date birthdate = formatter.parse(birthday);
             if (birthdate.after(new Date())) throw new ResponseStatusException(
@@ -55,27 +55,27 @@ public class DoctorService {
         DoctorEntity oldDoctor = repository.findById(id).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Id de médico inválido"));
 
-        if (!request.getCpf().equals(oldDoctor.getCpf()) || !request.getRg().equals(oldDoctor.getRg()))
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "CPF e RG não podem ser alterados");
 
         DoctorEntity updatedDoctor = mapper.map(request);
         updatedDoctor.setId(oldDoctor.getId());
+        updatedDoctor.setCpf(oldDoctor.getCpf());
+        updatedDoctor.setRg(oldDoctor.getRg());
+        updatedDoctor.setPassword(oldDoctor.getPassword());
 
         return mapper.map(repository.save(updatedDoctor));
     }
 
     public DoctorResponse changePassword(Integer id, String password) {
         DoctorEntity doctor = repository.findById(id).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Id de médico inválido"));
+                HttpStatus.NOT_FOUND, "Id de médico inexistente"));
 
         doctor.setPassword(password);
 
         return mapper.map(repository.save(doctor));
     }
 
-    public void findById(Integer id) {
-        repository.findById(id).orElseThrow((() -> new ResponseStatusException(
+    public DoctorEntity findById(Integer id) {
+        return repository.findById(id).orElseThrow((() -> new ResponseStatusException(
                 HttpStatus.BAD_REQUEST, "Id de médico inexistente")));
     }
 }

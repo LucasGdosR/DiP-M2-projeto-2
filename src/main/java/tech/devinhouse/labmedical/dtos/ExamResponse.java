@@ -5,7 +5,7 @@ public class ExamResponse {
     private String dateTime;
     private String type;
     private String laboratory;
-    private String file;
+    private String fileUrl;
     private String results;
     private Integer patientId;
     private Integer doctorId;
@@ -42,12 +42,12 @@ public class ExamResponse {
         this.laboratory = laboratory;
     }
 
-    public String getFile() {
-        return file;
+    public String getFileUrl() {
+        return fileUrl;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 
     public String getResults() {

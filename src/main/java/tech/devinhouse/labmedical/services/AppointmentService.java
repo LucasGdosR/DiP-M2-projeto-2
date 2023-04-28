@@ -9,6 +9,7 @@ import tech.devinhouse.labmedical.entities.AppointmentEntity;
 import tech.devinhouse.labmedical.mappers.AppointmentMapper;
 import tech.devinhouse.labmedical.repositories.AppointmentRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,6 +31,7 @@ public class AppointmentService {
         patientService.findById(request.getPatientId());
 
         AppointmentEntity appointment = mapper.map(request);
+        appointment.setDateTime(LocalDateTime.now());
 
         return repository.save(appointment);
     }

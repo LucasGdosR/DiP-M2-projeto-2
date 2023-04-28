@@ -13,7 +13,7 @@ public class ExamEntity {
     private LocalDateTime dateTime;
     private String type;
     private String laboratory;
-    private String file;
+    private String fileUrl;
     private String results;
     @ManyToOne
     private PatientEntity patient;
@@ -23,13 +23,13 @@ public class ExamEntity {
     public ExamEntity() {
     }
 
-    public ExamEntity(Integer id, String name, LocalDateTime dateTime, String type, String laboratory, String file, String results, PatientEntity patient, DoctorEntity doctor) {
+    public ExamEntity(Integer id, String name, LocalDateTime dateTime, String type, String laboratory, String fileUrl, String results, PatientEntity patient, DoctorEntity doctor) {
         this.id = id;
         this.name = name;
         this.dateTime = dateTime;
         this.type = type;
         this.laboratory = laboratory;
-        this.file = file;
+        this.fileUrl = fileUrl;
         this.results = results;
         this.patient = patient;
         this.doctor = doctor;
@@ -75,12 +75,12 @@ public class ExamEntity {
         this.laboratory = laboratory;
     }
 
-    public String getFile() {
-        return file;
+    public String getFileUrl() {
+        return fileUrl;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 
     public String getResults() {

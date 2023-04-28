@@ -9,6 +9,7 @@ import tech.devinhouse.labmedical.entities.ExamEntity;
 import tech.devinhouse.labmedical.mappers.ExamMapper;
 import tech.devinhouse.labmedical.repositories.ExamRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,6 +31,7 @@ public class ExamService {
         patientService.findById(request.getPatientId());
 
         ExamEntity exam = mapper.map(request);
+        exam.setDateTime(LocalDateTime.now());
 
         return repository.save(exam);
     }

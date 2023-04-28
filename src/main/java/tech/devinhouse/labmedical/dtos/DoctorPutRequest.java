@@ -1,9 +1,7 @@
 package tech.devinhouse.labmedical.dtos;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -16,12 +14,8 @@ public class DoctorPutRequest {
     @NotBlank
     private String gender;
     @NotBlank
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private String birthday;
-    @CPF
-    @NotBlank
-    private String cpf;
-    @NotBlank
-    private String rg;
     @Min(0) @Max(4)
     private Integer maritalStatus;
     @NotBlank
@@ -34,7 +28,7 @@ public class DoctorPutRequest {
     @NotBlank
     private String crm;
     @Min(0) @Max(7)
-    private String specialization;
+    private Integer specialization;
 
     public String getFullName() {
         return fullName;
@@ -58,22 +52,6 @@ public class DoctorPutRequest {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
     }
 
     public Integer getMaritalStatus() {
@@ -116,11 +94,11 @@ public class DoctorPutRequest {
         this.crm = crm;
     }
 
-    public String getSpecialization() {
+    public Integer getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Integer specialization) {
         this.specialization = specialization;
     }
 }

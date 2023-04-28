@@ -1,5 +1,6 @@
 package tech.devinhouse.labmedical.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
@@ -13,6 +14,7 @@ public class DoctorPostRequest {
     @NotBlank
     private String gender;
     @NotBlank
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private String birthday;
     @CPF
     @NotBlank
@@ -31,7 +33,7 @@ public class DoctorPostRequest {
     @NotBlank
     private String crm;
     @Min(0) @Max(7)
-    private String specialization;
+    private Integer specialization;
     @Size(min = 8)
     @Pattern(regexp = "^[A-Za-z0-9]*$")
     private String password;
@@ -116,11 +118,11 @@ public class DoctorPostRequest {
         this.crm = crm;
     }
 
-    public String getSpecialization() {
+    public Integer getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Integer specialization) {
         this.specialization = specialization;
     }
 

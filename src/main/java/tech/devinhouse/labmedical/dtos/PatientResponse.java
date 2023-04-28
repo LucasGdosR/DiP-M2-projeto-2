@@ -1,6 +1,5 @@
 package tech.devinhouse.labmedical.dtos;
 
-import tech.devinhouse.labmedical.entities.AddressEntity;
 import tech.devinhouse.labmedical.entities.AppointmentEntity;
 import tech.devinhouse.labmedical.entities.ExamEntity;
 
@@ -12,7 +11,7 @@ public class PatientResponse {
     private String birthday;
     private String cpf;
     private String rg;
-    private String maritalStatus;
+    private Integer maritalStatus;
     private String telephone;
     private String email;
     private String placeOfBirth;
@@ -22,9 +21,9 @@ public class PatientResponse {
     private String insurance;
     private String insuranceCardId;
     private String insuranceExpirationDate;
-    private AddressEntity address;
-    private List<AppointmentEntity> appointments;
-    private List<ExamEntity> exams;
+    private Integer addressId;
+    private List<Integer> appointmentIds;
+    private List<Integer> examIds;
 
     public String getFullName() {
         return fullName;
@@ -66,11 +65,11 @@ public class PatientResponse {
         this.rg = rg;
     }
 
-    public String getMaritalStatus() {
+    public Integer getMaritalStatus() {
         return maritalStatus;
     }
 
-    public void setMaritalStatus(String maritalStatus) {
+    public void setMaritalStatus(Integer maritalStatus) {
         this.maritalStatus = maritalStatus;
     }
 
@@ -146,27 +145,27 @@ public class PatientResponse {
         this.insuranceExpirationDate = insuranceExpirationDate;
     }
 
-    public AddressEntity getAddress() {
-        return address;
+    public Integer getAddressId() {
+        return addressId;
     }
 
-    public void setAddress(AddressEntity address) {
-        this.address = address;
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
-    public List<AppointmentEntity> getAppointments() {
-        return appointments;
+    public List<Integer> getAppointmentIds() {
+        return appointmentIds;
     }
 
-    public void setAppointments(List<AppointmentEntity> appointments) {
-        this.appointments = appointments;
+    public void setAppointmentIds(List<Integer> appointmentIds) {
+        this.appointmentIds = appointmentIds;
     }
 
-    public List<ExamEntity> getExams() {
-        return exams;
+    public List<Integer> getExamIds() {
+        return examIds;
     }
 
-    public void setExams(List<ExamEntity> exams) {
-        this.exams = exams;
+    public void setExamIds(List<Integer> examIds) {
+        this.examIds = examIds;
     }
 }

@@ -1,1 +1,1 @@
-INSERT INTO labmedicaldb.DOCTOR_ENTITY
+--INSERT INTO labmedicaldb.DOCTOR_ENTITY

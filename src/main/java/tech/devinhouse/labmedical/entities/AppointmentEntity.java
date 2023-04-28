@@ -10,9 +10,13 @@ public class AppointmentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String motive;
+    @Column(name = "date_time")
     private LocalDateTime dateTime;
+    @Column(name = "issue_description")
     private String issueDescription;
+    @Column(name = "prescribed_medication")
     private String prescribedMedication;
+    @Column(name = "dosage_and_precautions")
     private String dosageAndPrecautions;
     @ManyToOne
     private DoctorEntity doctor;

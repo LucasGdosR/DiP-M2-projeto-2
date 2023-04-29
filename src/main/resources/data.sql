@@ -8,9 +8,9 @@ INSERT INTO ADDRESS_ENTITY (CEP, CITY, COMPLEMENT, NEIGHBORHOOD, NUM, STATE, STR
     VALUES ('02013-080', 'São Paulo', 'apto 103', 'Santana', '89', 'SP', 'Rua Macaiá-Mirim');
 
 INSERT INTO DOCTOR_ENTITY (BIRTHDAY, CPF, EMAIL, FULL_NAME, GENDER, MARITAL_STATUS, PLACE_OF_BIRTH, RG, TELEPHONE, CRM, PASSWORD, SPECIALIZATION)
-    VALUES (TO_DATE('01/01/1991', 'dd/mm/yyyy'), '123.456.789-10', 'medico@philips.com', 'Doque Thor', 'M', 1, 'Blumenau', '87.654.321', '(12)93456-7890', '893.687-2', 'p4$$\/\/0rd', 1);
+    VALUES (TO_DATE('01/01/1991', 'dd/mm/yyyy'), '123.456.789-10', 'medico@philips.com', 'Doque Thor', 'M', 1, 'Blumenau', '87.654.321', '(12)93456-7890', '893.687-2', 'password1', 1);
 INSERT INTO DOCTOR_ENTITY (BIRTHDAY, CPF, EMAIL, FULL_NAME, GENDER, MARITAL_STATUS, PLACE_OF_BIRTH, RG, TELEPHONE, CRM, PASSWORD, SPECIALIZATION)
-    VALUES (TO_DATE('02/02/1992', 'dd/mm/yyyy'), '456.789.101-23', 'medico@fleury.com', 'Mad Co.', 'F', 2, 'São Paulo', '64.591.519', '(23)94567-8901', '632.782-4', 's3|\||-|4', 1);
+    VALUES (TO_DATE('02/02/1992', 'dd/mm/yyyy'), '456.789.101-23', 'medico@fleury.com', 'Mad Co.', 'F', 2, 'São Paulo', '64.591.519', '(23)94567-8901', '632.782-4', 'senha123', 1);
 
 INSERT INTO PATIENT_ENTITY (BIRTHDAY, CPF, EMAIL, FULL_NAME, GENDER, MARITAL_STATUS, PLACE_OF_BIRTH, RG, TELEPHONE, ALLERGY_LIST, EMERGENCY_CONTACT, INSURANCE, INSURANCE_CARD_ID, INSURANCE_EXPIRATION_DATE, SPECIAL_NEEDS, ADDRESS_ID)
     VALUES (TO_DATE('03/03/1993', 'dd/mm/yyyy'), '789.101.234-56', 'paciente@gmail.com', 'João da Silva', 'M', 3, 'Rio de Janeiro', '016.893.146', '(34)95678-9012', 'Amendoim', '(56)97890-1234', 'Unimed', '45.391', TO_DATE('01/01/2024', 'dd/mm/yyyy'), 'colher sangue deitado', 1);

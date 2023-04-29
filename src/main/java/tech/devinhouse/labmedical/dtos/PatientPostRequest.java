@@ -1,10 +1,7 @@
 package tech.devinhouse.labmedical.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
@@ -23,6 +20,7 @@ public class PatientPostRequest {
     private String cpf;
     @NotBlank
     private String rg;
+    @NotNull
     @Min(0) @Max(4)
     private Integer maritalStatus;
     @NotBlank
@@ -40,7 +38,7 @@ public class PatientPostRequest {
     private String insuranceCardId;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private String insuranceExpirationDate;
-    @NotBlank
+    @NotNull
     private Integer addressId;
 
     public String getFullName() {

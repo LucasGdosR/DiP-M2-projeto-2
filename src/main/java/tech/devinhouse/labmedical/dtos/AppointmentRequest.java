@@ -1,6 +1,7 @@
 package tech.devinhouse.labmedical.dtos;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -15,9 +16,9 @@ public class AppointmentRequest {
     private String prescribedMedication;
     @NotBlank
     private String dosageAndPrecautions;
-    @NotBlank
+    @NotNull
     private Integer doctorId;
-    @NotBlank
+    @NotNull
     private Integer patientId;
 
     public String getMotive() {

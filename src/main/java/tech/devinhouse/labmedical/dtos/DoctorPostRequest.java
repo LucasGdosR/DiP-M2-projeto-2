@@ -21,6 +21,7 @@ public class DoctorPostRequest {
     private String cpf;
     @NotBlank
     private String rg;
+    @NotNull
     @Min(0) @Max(4)
     private Integer maritalStatus;
     @NotBlank
@@ -32,6 +33,7 @@ public class DoctorPostRequest {
     private String placeOfBirth;
     @NotBlank
     private String crm;
+    @NotNull
     @Min(0) @Max(7)
     private Integer specialization;
     @Size(min = 8)

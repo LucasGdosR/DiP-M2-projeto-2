@@ -1,6 +1,7 @@
 package tech.devinhouse.labmedical.dtos;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +17,9 @@ public class ExamRequest {
     private String fileUrl;
     @NotBlank
     private String results;
+    @NotNull
     private Integer patientId;
+    @NotNull
     private Integer doctorId;
 
     public String getName() {

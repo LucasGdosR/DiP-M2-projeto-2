@@ -16,6 +16,7 @@ public class DoctorPutRequest {
     @NotBlank
     @JsonFormat(pattern = "dd-MM-yyyy")
     private String birthday;
+    @NotNull
     @Min(0) @Max(4)
     private Integer maritalStatus;
     @NotBlank
@@ -27,6 +28,7 @@ public class DoctorPutRequest {
     private String placeOfBirth;
     @NotBlank
     private String crm;
+    @NotNull
     @Min(0) @Max(7)
     private Integer specialization;
 

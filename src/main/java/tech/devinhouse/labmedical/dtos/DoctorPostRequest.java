@@ -36,8 +36,7 @@ public class DoctorPostRequest {
     @NotNull
     @Min(0) @Max(7)
     private Integer specialization;
-    @Size(min = 8)
-    @Pattern(regexp = "^[A-Za-z0-9]*$")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
     private String password;
 
     public String getFullName() {

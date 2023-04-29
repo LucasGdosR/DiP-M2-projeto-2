@@ -2,8 +2,6 @@ package tech.devinhouse.labmedical.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
@@ -14,8 +12,6 @@ import java.util.List;
 public class DoctorEntity extends Person {
     private String crm;
     private Integer specialization;
-    @Size(min = 8)
-    @Pattern(regexp = "^[A-Za-z0-9]*$")
     private String password;
     @OneToMany
     private List<AppointmentEntity> appointments;

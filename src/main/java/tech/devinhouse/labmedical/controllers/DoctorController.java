@@ -9,6 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import tech.devinhouse.labmedical.dtos.DoctorPostRequest;
 import tech.devinhouse.labmedical.dtos.DoctorPutRequest;
 import tech.devinhouse.labmedical.dtos.DoctorResponse;
+import tech.devinhouse.labmedical.dtos.Password;
 import tech.devinhouse.labmedical.entities.DoctorEntity;
 import tech.devinhouse.labmedical.services.DoctorService;
 
@@ -45,9 +46,7 @@ public class DoctorController {
     }
 
     @PutMapping("/{id}/senha")
-    public ResponseEntity<DoctorResponse> changePassword(@PathVariable Integer id,
-                                                         @RequestBody @Size(min = 8) @Pattern(regexp = "^[A-Za-z0-9]*$") @Valid
-                                                         String password) {
-        return ResponseEntity.ok(service.changePassword(id, password));
+    public ResponseEntity<DoctorResponse> changePassword(@PathVariable Integer id, @RequestBody @Valid Password password) {
+        return ResponseEntity.ok(service.changePassword(id, password.getPassword()));
     }
 }

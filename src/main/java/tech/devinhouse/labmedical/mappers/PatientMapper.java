@@ -111,7 +111,7 @@ public class PatientMapper {
                 patientEntity.setInsuranceExpirationDate( dateFormat.parse( source.getInsuranceExpirationDate() ) );
         }
         catch ( ParseException e ) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Validade do convênio no formato errado. Tente 'dd-MM-yyyy'");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data no formato errado. Tente 'dd-MM-yyyy'");
         }
         patientEntity.setMaritalStatus( source.getMaritalStatus() );
         patientEntity.setTelephone( source.getTelephone() );

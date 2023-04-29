@@ -5,8 +5,6 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientPutRequest {
@@ -33,6 +31,7 @@ public class PatientPutRequest {
     private String emergencyContact;
     private String insurance;
     private String insuranceCardId;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private String insuranceExpirationDate;
     @NotNull
     private java.lang.Integer addressId;

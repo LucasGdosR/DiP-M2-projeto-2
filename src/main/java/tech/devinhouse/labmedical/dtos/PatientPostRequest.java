@@ -36,7 +36,7 @@ public class PatientPostRequest {
     private String emergencyContact;
     private String insurance;
     private String insuranceCardId;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private String insuranceExpirationDate;
     @NotNull
     private Integer addressId;

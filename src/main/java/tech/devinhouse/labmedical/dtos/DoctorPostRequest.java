@@ -2,12 +2,13 @@ package tech.devinhouse.labmedical.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientPutRequest {
+@Builder
+public class DoctorPostRequest {
     @NotBlank
     private String fullName;
     @NotBlank
@@ -15,6 +16,11 @@ public class PatientPutRequest {
     @NotBlank
     @JsonFormat(pattern = "dd-MM-yyyy")
     private String birthday;
+    @CPF
+    @NotBlank
+    private String cpf;
+    @NotBlank
+    private String rg;
     @NotNull
     @Min(0) @Max(4)
     private Integer maritalStatus;
@@ -25,16 +31,13 @@ public class PatientPutRequest {
     private String email;
     @NotBlank
     private String placeOfBirth;
-    private String allergyList;
-    private String specialNeeds;
     @NotBlank
-    private String emergencyContact;
-    private String insurance;
-    private String insuranceCardId;
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private String insuranceExpirationDate;
+    private String crm;
     @NotNull
-    private java.lang.Integer addressId;
+    @Min(0) @Max(7)
+    private Integer specialization;
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    private String password;
 
     public String getFullName() {
         return fullName;
@@ -58,6 +61,22 @@ public class PatientPutRequest {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
     public Integer getMaritalStatus() {
@@ -92,59 +111,27 @@ public class PatientPutRequest {
         this.placeOfBirth = placeOfBirth;
     }
 
-    public String getAllergyList() {
-        return allergyList;
+    public String getCrm() {
+        return crm;
     }
 
-    public void setAllergyList(String allergyList) {
-        this.allergyList = allergyList;
+    public void setCrm(String crm) {
+        this.crm = crm;
     }
 
-    public String getSpecialNeeds() {
-        return specialNeeds;
+    public Integer getSpecialization() {
+        return specialization;
     }
 
-    public void setSpecialNeeds(String specialNeeds) {
-        this.specialNeeds = specialNeeds;
+    public void setSpecialization(Integer specialization) {
+        this.specialization = specialization;
     }
 
-    public String getEmergencyContact() {
-        return emergencyContact;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmergencyContact(String emergencyContact) {
-        this.emergencyContact = emergencyContact;
-    }
-
-    public String getInsurance() {
-        return insurance;
-    }
-
-    public void setInsurance(String insurance) {
-        this.insurance = insurance;
-    }
-
-    public String getInsuranceCardId() {
-        return insuranceCardId;
-    }
-
-    public void setInsuranceCardId(String insuranceCardId) {
-        this.insuranceCardId = insuranceCardId;
-    }
-
-    public String getInsuranceExpirationDate() {
-        return insuranceExpirationDate;
-    }
-
-    public void setInsuranceExpirationDate(String insuranceExpirationDate) {
-        this.insuranceExpirationDate = insuranceExpirationDate;
-    }
-
-    public Integer getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(Integer addressId) {
-        this.addressId = addressId;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

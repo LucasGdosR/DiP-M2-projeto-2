@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import tech.devinhouse.labmedical.dtos.AppointmentRequest;
 import tech.devinhouse.labmedical.dtos.AppointmentResponse;
+import tech.devinhouse.labmedical.entities.AppointmentEntity;
 import tech.devinhouse.labmedical.services.AppointmentService;
 
 import java.net.URI;
@@ -21,11 +22,11 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public ResponseEntity<AppointmentResponse> register(
+    public ResponseEntity<AppointmentEntity> register(
             @RequestBody @Valid AppointmentRequest request,
             UriComponentsBuilder uriBuilder) {
 
-        AppointmentResponse response = service.register(request);
+        AppointmentEntity response = service.register(request);
 
         URI uri = uriBuilder
                 .path("/api/consultas/{id}")

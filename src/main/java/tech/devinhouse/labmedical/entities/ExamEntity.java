@@ -1,31 +1,109 @@
 package tech.devinhouse.labmedical.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class ExamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotBlank
     private String name;
-    @NotBlank
+    @Column(name = "date_time")
     private LocalDateTime dateTime;
-    @NotBlank
     private String type;
-    @NotBlank
     private String laboratory;
-    private String file;
-    @NotBlank
+    private String fileUrl;
     private String results;
     @ManyToOne
     private PatientEntity patient;
+    @ManyToOne
+    private DoctorEntity doctor;
+
+    public ExamEntity() {
+    }
+
+    public ExamEntity(Integer id, String name, LocalDateTime dateTime, String type, String laboratory, String fileUrl, String results, PatientEntity patient, DoctorEntity doctor) {
+        this.id = id;
+        this.name = name;
+        this.dateTime = dateTime;
+        this.type = type;
+        this.laboratory = laboratory;
+        this.fileUrl = fileUrl;
+        this.results = results;
+        this.patient = patient;
+        this.doctor = doctor;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getLaboratory() {
+        return laboratory;
+    }
+
+    public void setLaboratory(String laboratory) {
+        this.laboratory = laboratory;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
+    public String getResults() {
+        return results;
+    }
+
+    public void setResults(String results) {
+        this.results = results;
+    }
+
+    public PatientEntity getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientEntity patient) {
+        this.patient = patient;
+    }
+
+    public DoctorEntity getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(DoctorEntity doctor) {
+        this.doctor = doctor;
+    }
 }

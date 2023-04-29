@@ -1,10 +1,10 @@
 package tech.devinhouse.labmedical.services;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import tech.devinhouse.labmedical.dtos.AddressRequest;
-import tech.devinhouse.labmedical.dtos.AddressResponse;
 import tech.devinhouse.labmedical.entities.AddressEntity;
-import tech.devinhouse.labmedical.exceptions.NoSuchAddressException;
 import tech.devinhouse.labmedical.mappers.AddressMapper;
 import tech.devinhouse.labmedical.repositories.AddressRepository;
 
@@ -20,15 +20,16 @@ public class AddressService {
         this.mapper = mapper;
     }
 
-    public AddressResponse register(AddressRequest request) {
-        return mapper.map(repository.save(mapper.map(request)));
+    public AddressEntity register(AddressRequest request) {
+        return repository.save(mapper.map(request));
     }
 
-    public List<AddressResponse> findAll() {
-        return mapper.map(repository.findAll());
+    public List<AddressEntity> findAll() {
+        return repository.findAll();
     }
 
     public AddressEntity findById(Integer id) {
-        return repository.findById(id).orElseThrow(NoSuchAddressException::new);
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Id de endereço não existente"));
     }
 }

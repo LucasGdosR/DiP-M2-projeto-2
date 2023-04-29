@@ -1,15 +1,18 @@
 package tech.devinhouse.labmedical.services;
 
-import lombok.SneakyThrows;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import tech.devinhouse.labmedical.dtos.PatientPostRequest;
 import tech.devinhouse.labmedical.dtos.PatientPutRequest;
 import tech.devinhouse.labmedical.dtos.PatientResponse;
 import tech.devinhouse.labmedical.entities.PatientEntity;
-import tech.devinhouse.labmedical.exceptions.*;
 import tech.devinhouse.labmedical.mappers.PatientMapper;
+import tech.devinhouse.labmedical.repositories.AppointmentRepository;
+import tech.devinhouse.labmedical.repositories.ExamRepository;
 import tech.devinhouse.labmedical.repositories.PatientRepository;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,49 +20,64 @@ import java.util.List;
 @Service
 public class PatientService {
     private final AddressService addressService;
+    private final AppointmentRepository appointmentRepository;
+    private final ExamRepository examRepository;
     private final PatientMapper mapper;
     private final PatientRepository repository;
 
-    public PatientService(AddressService addressService, PatientMapper mapper, PatientRepository repository) {
+    public PatientService(AddressService addressService, AppointmentRepository appointmentRepository, ExamRepository examRepository, PatientMapper mapper, PatientRepository repository) {
         this.addressService = addressService;
+        this.appointmentRepository = appointmentRepository;
+        this.examRepository = examRepository;
         this.mapper = mapper;
         this.repository = repository;
     }
 
-    public PatientResponse register(PatientPostRequest request) {
+    public PatientEntity register(PatientPostRequest request) {
         validateBirthday(request.getBirthday());
         validateAddress(request.getAddressId());
         validateUniqueCPF(request.getCpf());
 
         PatientEntity newPatient = mapper.map(request);
+        newPatient.setAddress(addressService.findById(request.getAddressId()));
 
-        return mapper.map(repository.save(newPatient));
+        return repository.save(newPatient);
     }
 
-    @SneakyThrows
     private void validateBirthday(String birthday) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyy");
-        Date birthdate = formatter.parse(birthday);
-        if (birthdate.after(new Date())) throw new IllegalBirthdayException();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date birthdate = formatter.parse(birthday);
+            if (birthdate.after(new Date())) throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Data de nascimento no futuro");
+        } catch (ParseException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Formato de data inválida");
+        }
     }
 
-    private void validateAddress(Integer id) throws NoSuchAddressException {
+    private void validateAddress(Integer id) throws ResponseStatusException {
         addressService.findById(id);
     }
 
     private void validateUniqueCPF(String cpf) {
-        repository.findByCpf(cpf).ifPresent(e -> {throw new DuplicateCpfException();});
+        repository.findByCpf(cpf).ifPresent(
+                e -> {throw new ResponseStatusException(HttpStatus.CONFLICT, "CPF duplicado");});
     }
 
     public PatientResponse update(Integer id, PatientPutRequest request) {
         validateBirthday(request.getBirthday());
         validateAddress(request.getAddressId());
 
-        PatientEntity oldPatient = repository.findById(id).orElseThrow(NoSuchPatientException::new);
+        PatientEntity oldPatient = repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Id de paciente inválido"));
+
         PatientEntity updatedPatient = mapper.map(request);
+
         updatedPatient.setId(oldPatient.getId());
         updatedPatient.setCpf(oldPatient.getCpf());
         updatedPatient.setRg(oldPatient.getRg());
+
+        updatedPatient.setAddress(addressService.findById(request.getAddressId()));
 
         return mapper.map(repository.save(updatedPatient));
     }
@@ -73,15 +91,22 @@ public class PatientService {
     }
 
     public PatientResponse findById(Integer id) {
-        return mapper.map(repository.findById(id).orElseThrow(NoSuchPatientException::new));
+        return mapper.map(repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Id de paciente inválido")));
     }
 
     public void deleteById(Integer id) {
-        PatientEntity patient = repository.findById(id).orElseThrow(NoSuchPatientException::new);
+        PatientEntity patient = repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Id de paciente inválido"));
 
-        if (patient.getExams().size() > 0 || patient.getAppointments().size() > 0)
-            throw new PatientHasAppointmentsOrExamsException();
+        if (appointmentRepository.findByPatient(patient).size() > 0 || examRepository.findByPatient(patient).size() > 0)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Paciente possui consulta ou exame");
 
         repository.deleteById(id);
+    }
+
+    public PatientEntity findEntityById(Integer id) {
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Id de paciente inválido"));
     }
 }

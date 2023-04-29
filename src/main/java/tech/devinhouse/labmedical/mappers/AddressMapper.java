@@ -1,17 +1,34 @@
 package tech.devinhouse.labmedical.mappers;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import org.springframework.stereotype.Component;
 import tech.devinhouse.labmedical.dtos.AddressRequest;
-import tech.devinhouse.labmedical.dtos.AddressResponse;
 import tech.devinhouse.labmedical.entities.AddressEntity;
 
-import java.util.List;
+/*
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2023-04-28T12:32:18-0300",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 18.0.2.1 (Oracle Corporation)"
+)
+*/
+@Component
+public class AddressMapper {
+    public AddressEntity map(AddressRequest source) {
+        if ( source == null ) {
+            return null;
+        }
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface AddressMapper {
-    AddressEntity map(AddressRequest source);
-    AddressResponse map(AddressEntity source);
+        AddressEntity addressEntity = new AddressEntity();
 
-    List<AddressResponse> map(List<AddressEntity> source);
+        addressEntity.setCep( source.getCep() );
+        addressEntity.setCity( source.getCity() );
+        addressEntity.setState( source.getState() );
+        addressEntity.setStreet( source.getStreet() );
+        addressEntity.setNum( source.getNum() );
+        addressEntity.setComplement( source.getComplement() );
+        addressEntity.setNeighborhood( source.getNeighborhood() );
+        addressEntity.setReference( source.getReference() );
+
+        return addressEntity;
+    }
 }

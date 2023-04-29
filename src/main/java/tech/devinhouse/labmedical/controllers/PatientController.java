@@ -7,6 +7,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import tech.devinhouse.labmedical.dtos.PatientPostRequest;
 import tech.devinhouse.labmedical.dtos.PatientPutRequest;
 import tech.devinhouse.labmedical.dtos.PatientResponse;
+import tech.devinhouse.labmedical.entities.PatientEntity;
 import tech.devinhouse.labmedical.services.PatientService;
 
 import java.net.URI;
@@ -23,11 +24,11 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<PatientResponse> register(
+    public ResponseEntity<PatientEntity> register(
             @RequestBody @Valid PatientPostRequest request,
             UriComponentsBuilder uriBuilder) {
 
-        PatientResponse response = service.register(request);
+        PatientEntity response = service.register(request);
 
         URI uri = uriBuilder
                 .path("/api/pacientes/{id}")

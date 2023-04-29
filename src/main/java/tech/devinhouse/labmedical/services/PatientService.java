@@ -8,6 +8,8 @@ import tech.devinhouse.labmedical.dtos.PatientPutRequest;
 import tech.devinhouse.labmedical.dtos.PatientResponse;
 import tech.devinhouse.labmedical.entities.PatientEntity;
 import tech.devinhouse.labmedical.mappers.PatientMapper;
+import tech.devinhouse.labmedical.repositories.AppointmentRepository;
+import tech.devinhouse.labmedical.repositories.ExamRepository;
 import tech.devinhouse.labmedical.repositories.PatientRepository;
 
 import java.text.ParseException;
@@ -18,11 +20,15 @@ import java.util.List;
 @Service
 public class PatientService {
     private final AddressService addressService;
+    private final AppointmentRepository appointmentRepository;
+    private final ExamRepository examRepository;
     private final PatientMapper mapper;
     private final PatientRepository repository;
 
-    public PatientService(AddressService addressService, PatientMapper mapper, PatientRepository repository) {
+    public PatientService(AddressService addressService, AppointmentRepository appointmentRepository, ExamRepository examRepository, PatientMapper mapper, PatientRepository repository) {
         this.addressService = addressService;
+        this.appointmentRepository = appointmentRepository;
+        this.examRepository = examRepository;
         this.mapper = mapper;
         this.repository = repository;
     }
@@ -70,8 +76,6 @@ public class PatientService {
         updatedPatient.setId(oldPatient.getId());
         updatedPatient.setCpf(oldPatient.getCpf());
         updatedPatient.setRg(oldPatient.getRg());
-        updatedPatient.setAppointments(oldPatient.getAppointments());
-        updatedPatient.setExams(oldPatient.getExams());
 
         updatedPatient.setAddress(addressService.findById(request.getAddressId()));
 
@@ -95,7 +99,7 @@ public class PatientService {
         PatientEntity patient = repository.findById(id).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Id de paciente inválido"));
 
-        if (patient.getExams().size() > 0 || patient.getAppointments().size() > 0)
+        if (appointmentRepository.findByPatient(patient).size() > 0 || examRepository.findByPatient(patient).size() > 0)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Paciente possui consulta ou exame");
 
         repository.deleteById(id);

@@ -1,11 +1,9 @@
 package tech.devinhouse.labmedical.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @SuperBuilder
@@ -13,10 +11,6 @@ public class DoctorEntity extends Person {
     private String crm;
     private Integer specialization;
     private String password;
-    @OneToMany
-    private List<AppointmentEntity> appointments;
-    @OneToMany
-    private List<ExamEntity> exams;
 
     public DoctorEntity() {
     }

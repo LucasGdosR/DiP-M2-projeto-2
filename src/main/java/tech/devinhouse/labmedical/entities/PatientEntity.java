@@ -3,7 +3,6 @@ package tech.devinhouse.labmedical.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
@@ -25,10 +24,6 @@ public class PatientEntity extends Person {
     private Date insuranceExpirationDate;
     @ManyToOne
     private AddressEntity address;
-    @OneToMany
-    private List<AppointmentEntity> appointments;
-    @OneToMany
-    private List<ExamEntity> exams;
 
     public PatientEntity() {
     }
@@ -42,8 +37,8 @@ public class PatientEntity extends Person {
         this.insuranceCardId = insuranceCardId;
         this.insuranceExpirationDate = insuranceExpirationDate;
         this.address = address;
-        this.appointments = appointments;
-        this.exams = exams;
+        //this.appointments = appointments;
+        //this.exams = exams;
     }
 
     public String getAllergyList() {
@@ -100,21 +95,5 @@ public class PatientEntity extends Person {
 
     public void setAddress(AddressEntity address) {
         this.address = address;
-    }
-
-    public List<AppointmentEntity> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(List<AppointmentEntity> appointments) {
-        this.appointments = appointments;
-    }
-
-    public List<ExamEntity> getExams() {
-        return exams;
-    }
-
-    public void setExams(List<ExamEntity> exams) {
-        this.exams = exams;
     }
 }

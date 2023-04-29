@@ -1,7 +1,5 @@
 package tech.devinhouse.labmedical.dtos;
 
-import java.util.List;
-
 public class PatientResponse {
     private String fullName;
     private String gender;
@@ -19,8 +17,6 @@ public class PatientResponse {
     private String insuranceCardId;
     private String insuranceExpirationDate;
     private Integer addressId;
-    private List<Integer> appointmentIds;
-    private List<Integer> examIds;
 
     public String getFullName() {
         return fullName;
@@ -148,21 +144,5 @@ public class PatientResponse {
 
     public void setAddressId(Integer addressId) {
         this.addressId = addressId;
-    }
-
-    public List<Integer> getAppointmentIds() {
-        return appointmentIds;
-    }
-
-    public void setAppointmentIds(List<Integer> appointmentIds) {
-        this.appointmentIds = appointmentIds;
-    }
-
-    public List<Integer> getExamIds() {
-        return examIds;
-    }
-
-    public void setExamIds(List<Integer> examIds) {
-        this.examIds = examIds;
     }
 }

@@ -11,8 +11,6 @@ import org.springframework.web.server.ResponseStatusException;
 import tech.devinhouse.labmedical.dtos.PatientPostRequest;
 import tech.devinhouse.labmedical.dtos.PatientPutRequest;
 import tech.devinhouse.labmedical.dtos.PatientResponse;
-import tech.devinhouse.labmedical.entities.AppointmentEntity;
-import tech.devinhouse.labmedical.entities.ExamEntity;
 import tech.devinhouse.labmedical.entities.PatientEntity;
 
 /*
@@ -83,14 +81,6 @@ public class PatientMapper {
 
         if ( source.getInsuranceExpirationDate() != null )
             patientResponse.setInsuranceExpirationDate( new SimpleDateFormat("dd-MM-yyyy").format( source.getInsuranceExpirationDate() ) );
-
-        List<AppointmentEntity> list = source.getAppointments();
-        if ( list != null )
-            patientResponse.setAppointmentIds(list.stream().map(AppointmentEntity::getId).toList());
-
-        List<ExamEntity> list1 = source.getExams();
-        if ( list1 != null )
-            patientResponse.setExamIds(list1.stream().map(ExamEntity::getId).toList());
 
         return patientResponse;
     }

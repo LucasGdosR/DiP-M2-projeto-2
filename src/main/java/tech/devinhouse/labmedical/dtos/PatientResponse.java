@@ -1,8 +1,5 @@
 package tech.devinhouse.labmedical.dtos;
 
-import tech.devinhouse.labmedical.entities.AppointmentEntity;
-import tech.devinhouse.labmedical.entities.ExamEntity;
-
 import java.util.List;
 
 public class PatientResponse {

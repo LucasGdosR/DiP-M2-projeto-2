@@ -3,7 +3,6 @@ package tech.devinhouse.labmedical.dtos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.hibernate.validator.constraints.br.CPF;
 
 @AllArgsConstructor
 @NoArgsConstructor

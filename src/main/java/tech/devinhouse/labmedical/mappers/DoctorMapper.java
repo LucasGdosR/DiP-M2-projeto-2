@@ -59,7 +59,7 @@ public class DoctorMapper {
         doctorEntity.setFullName( source.getFullName() );
         doctorEntity.setGender( source.getGender() );
         try {
-            doctorEntity.setBirthday( new SimpleDateFormat().parse( source.getBirthday() ) );
+            doctorEntity.setBirthday( new SimpleDateFormat("dd-MM-yyyy").parse( source.getBirthday() ) );
         }
         catch ( ParseException e ) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Idade no formato errado. Tente 'dd-MM-yyyy'");

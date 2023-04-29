@@ -32,6 +32,8 @@ Para rodar o programa, é necessário baixar tudo, abrir na sua IDE favorita, e 
 
 Uma vez que a aplicação está rodando, é possível testar com algum programa que envie requisições http. Na raiz do projeto, na pasta `postman`, tem um arquivo `.json` com testes para todos os endpoints da aplicação.
 
+[Vídeo](https://drive.google.com/file/d/16JwLVoXwEOGuPD7YtPDhdVCHJ9rDUeNs/view?usp=share_link) de execução
+
 ### Melhorias
 As validações do programa são relativamente simples, aplicando a regra de negócio de que CPFs são únicos, alguns campos são obrigatórios, datas seguem um formato específico, assim como e-mail e CPF. Poderiam ser feitas validações mais sofisticadas, como formato padronizado de telefone, etc. Alguns endpoints facilitariam o uso da aplicação, como buscar consultas e exames por paciente. Poderia ser incluído autenticação de médico.
 
